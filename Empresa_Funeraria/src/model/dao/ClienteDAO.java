@@ -126,25 +126,27 @@ public class ClienteDAO {
     }
 
     public void update(Cliente c) {
-
+        
         Connection con = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE cliente SET nome = ? ,cpf = ?, endereco = ?, celular = ?, email = ?, profissao = ? WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE cliente SET nome=?, cpf=?,endereco=?, celular=?, email=?, profissao=? WHERE id=?");
             stmt.setString(1, c.getNome());
             stmt.setInt(2, c.getCpf());
             stmt.setString(3, c.getEndereco());
             stmt.setInt(4, c.getCelular());
             stmt.setString(5, c.getEmail());
             stmt.setString(6, c.getProfissao());
+            stmt.setInt(7, c.getId());
+            
 
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao salvo: " + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }

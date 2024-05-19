@@ -35,19 +35,21 @@ public class ViewJTable extends javax.swing.JFrame {
         modelo.setNumRows(0);
         ClienteDAO pdao = new ClienteDAO();
 
-        for (Cliente c : pdao.read()) {
+        for (Cliente p : pdao.read()) {
 
             modelo.addRow(new Object[]{
-                c.getId(),
-                c.getNome(),
-                c.getCpf(),
-                c.getEndereco(),
-                c.getCelular(),
-                c.getEmail(),
-                c.getProfissao()
+                p.getId(),
+                p.getNome(),
+                p.getCpf(),
+                p.getEndereco(),
+                p.getCelular(),
+                p.getCelular(),
+                p.getEmail(),
+                p.getProfissao()
             });
 
         }
+
 
     }
     public void readJTableForDesc(String desc) {
@@ -378,28 +380,26 @@ public class ViewJTable extends javax.swing.JFrame {
 
         if (jTCliente.getSelectedRow() != -1) {
 
-            Cliente c = new Cliente();
-            ClienteDAO dao = new ClienteDAO();
+           Cliente c = new Cliente();
+        ClienteDAO dao = new ClienteDAO();
 
-            c.setNome(txtNome.getText());
-            c.setCpf(Integer.parseInt(txtCpf.getText()));
-            c.setEndereco(txtEndereco.getText());
-            c.setCelular(Integer.parseInt(txtCelular.getText()));
-            c.setEmail(txtEmail.getText());
-            c.setProfissao(txtProfissao.getText());
-            c.setId((int) jTCliente.getValueAt(jTCliente.getSelectedRow(), 0));
-            dao.update(c); 
+        c.setNome(txtNome.getText());
+        c.setCpf(Integer.parseInt(txtCpf.getText()));
+        c.setEndereco(txtEndereco.getText());
+        c.setCelular(Integer.parseInt(txtCelular.getText()));
+        c.setEmail(txtEmail.getText());
+        c.setProfissao(txtProfissao.getText());
+        c.setId((int)jTCliente.getValueAt(jTCliente.getSelectedRow(), 0));
+        dao.update(c);
 
-            txtNome.setText("");
-            txtCpf.setText("");
-            txtEndereco.setText("");
-            txtEndereco.setText("");
-            txtCelular.setText("");
-            txtEmail.setText("");
-            txtProfissao.setText("");
-                    
-            readJTable();
+        txtNome.setText("");
+        txtCpf.setText("");
+        txtEndereco.setText("");
+        txtCelular.setText("");
+        txtEmail.setText("");
+        txtProfissao.setText("");
 
+        readJTable();
         }
 
 
