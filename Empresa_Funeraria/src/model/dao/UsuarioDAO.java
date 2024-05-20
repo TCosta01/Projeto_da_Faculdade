@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.bean.Usuario;
 
 /**
  *
@@ -49,5 +51,30 @@ public class UsuarioDAO {
         return check;
 
     }
+    
+    public void create(Usuario u) {
+        
+        Connection con = ConnectionFactory.getConnection();
+        
+        PreparedStatement stmt = null;
 
+        try {
+            stmt = con.prepareStatement("INSERT INTO usuario (login,senha)VALUES(?,?)");
+            stmt.setString(1, u.getLogin());
+            stmt.setString(2, u.getSenha());
+            
+            
+
+            stmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+
+    }
+
+    
 }
